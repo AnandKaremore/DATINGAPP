@@ -8,6 +8,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App"/>
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All"/>
-    <PackageReference Include="Simple.Data.SqlServer" Version="1.0.0-rc3"/>
+    <PackageReference Include="System.Data.Entity.Repository" Version="1.0.0.9"/>
   </ItemGroup>
 </Project>

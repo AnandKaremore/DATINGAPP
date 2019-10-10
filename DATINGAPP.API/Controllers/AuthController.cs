@@ -1,10 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DATINGAPP.API.Data;
+using Microsoft.AspNetCore.Mvc;
+using DATINGAPP.API.Models;
+using System.Web.Http;
 namespace DATINGAPP.API.Controllers
 {
-    [Rout("api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class AuthController:ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepository;
         public AuthController(IAuthRepository authRepository)

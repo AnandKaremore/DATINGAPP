@@ -1,3 +1,10 @@
+using System;
+using System.Linq;
+using System.Data.Entity;
+using DATINGAPP.API.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 namespace DATINGAPP.API.Data
 {
     public class AuthRepository : IAuthRepository
@@ -14,7 +21,7 @@ namespace DATINGAPP.API.Data
         #region Utility
         public void CreatePasswordHash(string password,out byte[] passwordHash,out byte[] passwordSalt)
         {
-            using (var hmac = System.Security.Cryptography.HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -22,14 +29,16 @@ namespace DATINGAPP.API.Data
         }
         public bool VerifyPasswordHash(string password,byte[] passwordHash,byte[] passwordSalt)
         {
-            using (var hmac = System.Security.Cryptography.HMACSHA512(passwordSalt))
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for(int i=0;<computedHash.Length;i++)
+                for(int i=0;i<computedHash.Length;i++)
                 {
-                    if(computedHash[i]) != passwordSalt[i] return false;
+                    if(computedHash[i] != passwordSalt[i] )
+                     return false;
                 }
             }
+            return true;
         }
         #endregion
 
@@ -47,9 +56,9 @@ namespace DATINGAPP.API.Data
 
             return user;
         }
-        public async Task<USER> Login(string username,string password)
+        public async Task<User> Login(string username,string password)
         {
-            var user await _context.User.FirstOrDefaultAsync(x=>x.Username == username);
+            var user = await _context.User.FirstOrDefaultAsync(x=>x.Username == username);
             if(user == null)
                 return null;
 
@@ -60,7 +69,7 @@ namespace DATINGAPP.API.Data
         }
         public async Task<bool> UserExists(string username)
         {
-            if(await _context.user.AnyAsync(x=>x.Username == username))
+            if(await _context.User.AnyAsync(x=>x.Username == username))
                 return true;
 
             return false;
