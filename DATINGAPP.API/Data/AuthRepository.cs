@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
-using System.Data.Entity;
 using DATINGAPP.API.Models;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace DATINGAPP.API.Data
 {
@@ -34,7 +31,7 @@ namespace DATINGAPP.API.Data
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for(int i=0;i<computedHash.Length;i++)
                 {
-                    if(computedHash[i] != passwordSalt[i] )
+                    if(computedHash[i] != passwordHash[i] )
                      return false;
                 }
             }
