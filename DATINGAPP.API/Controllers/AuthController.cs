@@ -51,7 +51,7 @@ namespace DATINGAPP.API.Controllers
 
             return StatusCode(201);
         }
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForRegisterDto dto)
         {
             var userFromRepo = await _authRepository.Login(dto.Username.ToLower(), dto.Password);
