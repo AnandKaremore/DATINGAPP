@@ -7,18 +7,11 @@
     </div>
    
     <div class="form-group">
-      <label for='fevouritevalue'>What is your fevoritae value</label>
-      <select name="fevouritevalue" id="fevouritevalue" class="form-control">
-        <option *ngFor="let value of values" value="value">{{value.name}}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
       <input type="password" class="form-control" placeholder="Password" name="password" required [(ngModel)]="model.password" >
     </div>
   
     <div class="form-group text-center">
-      <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit" (click)="register" >Register</button>
+      <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit" (click)="register()" >Register</button>
       <button class="btn btn-default" type="button" (click)="cancel()" >Cancel</button>
     </div>
     

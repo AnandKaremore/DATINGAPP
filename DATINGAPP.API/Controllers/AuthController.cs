@@ -26,7 +26,7 @@ namespace DATINGAPP.API.Controllers
             _authRepository = authRepository;
             _config = config;
         }
-        [HttpGet("register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto dto)
         {
             //validate request
