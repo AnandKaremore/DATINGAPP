@@ -30,6 +30,8 @@ namespace DATINGAPP.API.Controllers
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto dto)
         {
             //validate request
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
             try
             {
                 dto.Username = dto.Username.ToLower();
