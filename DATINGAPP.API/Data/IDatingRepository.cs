@@ -13,6 +13,6 @@ namespace DATINGAPP.API.Data
 
          Task<User> GetUser(int id);
 
-         Task<IEnumerable<User>> GetAllUser();
+         Task<IEnumerable<User>> GetUsers();
     }
 }

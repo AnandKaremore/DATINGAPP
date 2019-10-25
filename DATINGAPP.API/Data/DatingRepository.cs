@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
-using System
+using DATINGAPP.API.Models;
+using System.Collections.Generic;
 namespace DATINGAPP.API.Data
 {
     public class DatingRepository:IDatingRepository
@@ -20,8 +21,17 @@ namespace DATINGAPP.API.Data
         }
         public Task<User> GetUser(int id)
         {
-            return _context.Users.Include(p=>p.Photos).FirstOrDefault(x=>x.Id==id);
+            var users = _context.Users.Include(p=>p.Photos).FirstOrDefaultAsync(x=>x.Id==id);
+            return users;
         }
-
+        public Task<IEnumerable<User>> GetUsers()
+        {
+            var users = await _context.Users.Include(p=> p.Photos).ToListAsync();
+            return users;
+        }
+        public Task<bool> SaveAll()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }
